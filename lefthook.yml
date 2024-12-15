@@ -1,0 +1,12 @@
+pre-commit:
+  commands:
+    test:
+      run: npm test
+
+commit-msg:
+  commands:
+    commitizen:
+      run: |
+        echo "Running commitizen"
+        LEFTHOOK=0 npx cz
+      interactive: true

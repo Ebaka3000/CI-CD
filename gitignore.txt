@@ -1,0 +1,7 @@
+# Ignored directories and files
+node_modules/
+coverage/
+dist/
+build/
+package-lock.json
+npm-debug.log

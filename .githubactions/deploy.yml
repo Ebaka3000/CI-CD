@@ -1,0 +1,50 @@
+name: "Deploy to GitHub Registry"
+
+on:
+  push:
+    branches: ["main"]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release_package:
+    name: Deploy to GitHub Registry
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+      packages: write
+    steps:
+      # Checkout the repository code
+      - uses: actions/checkout@v4
+        name: Checkout Code
+      
+      # Set up Node.js with specific version and npm registry URL
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://npm.pkg.github.com"
+        name: Set up Node.js
+      
+      # Install dependencies
+      - run: npm install
+        name: Install Dependencies
+      
+      # Build the project
+      - run: npm run build
+        name: Build Project
+      
+      # Run semantic release for the package deployment
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_FOR_RELEASE }}
+          NPM_TOKEN: ${{ secrets.GH_TOKEN_FOR_RELEASE }}
+          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN_FOR_RELEASE }}
+        run: npx semantic-release

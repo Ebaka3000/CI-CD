@@ -1,0 +1,49 @@
+{
+  "name": "@ebaka3000/kt4-ci-cd",
+  "version": "0.1.0",
+  "description": "A wrapper for vedomosti news API",
+  "type": "module",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "prepare": "lefthook install",
+    "dev": "tsx src/index.ts",
+    "build": "tsc --outDir dist",
+    "test": "jest --coverage --runInBand",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ebaka3000/kt4-ci-cd.git"
+  },
+  "keywords": [
+    "news",
+    "parser",
+    "api"
+  ],
+  "author": "Ebaka3000",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ebaka3000/kt4-ci-cd/issues"
+  },
+  "homepage": "https://github.com/Ebaka3000/kt4-ci-cd#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.9.1",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "jest": "^29.7.0",
+    "lefthook": "^1.8.4",
+    "semantic-release": "^24.2.0",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
